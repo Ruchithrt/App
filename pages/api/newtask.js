@@ -13,10 +13,14 @@ const handler = asyncError(async (req, res) => {
   if (!title || !description)
     return errorHandler(res, 400, "Please Enter All fields");
 
+  const user = await checkAuth(req);
+
+  if (!user) return errorHandler(res, 401, "Login First");
+
   await Task.create({
     title,
     description,
-    user: "507f1f77bcf86cd799439011",
+    user: user._id,
   });
 
   res.json({
