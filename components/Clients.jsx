@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -9,8 +9,21 @@ export const Context = createContext({ user: {} });
 export const ContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
+  useEffect(() => {
+    fetch("/api/auth/me")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) setUser(data.user);
+      });
+  }, []);
+
   return (
-    <Context.Provider value={{ user, setUser }}>
+    <Context.Provider
+      value={{
+        user,
+        setUser,
+      }}
+    >
       {children}
       <Toaster />
     </Context.Provider>

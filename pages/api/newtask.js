@@ -1,4 +1,4 @@
-import { connectDB } from "../../utils/features";
+import { connectDB, checkAuth } from "../../utils/features";
 import { Task } from "../../models/task";
 import { asyncError, errorHandler } from "@/middlewares/error";
 
