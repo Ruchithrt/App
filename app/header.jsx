@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { LogoutBtn } from "../components/Clients.jsx";
 
-const header = () => {
+const Header = () => {
   return (
     <div className="header">
       <div>
@@ -17,4 +17,4 @@ const header = () => {
   );
 };
 
-export default header;
+export default Header;
